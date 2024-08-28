@@ -1,4 +1,5 @@
 import { useState } from "react";
+import style from "./Options.module.css";
 
 export default function Options({
   updateFeedback,
@@ -8,7 +9,7 @@ export default function Options({
   const isAble = totalFeedback !== 0;
 
   return (
-    <div>
+    <div className={style.optionsBox}>
       <button
         onClick={() => {
           updateFeedback("good");
