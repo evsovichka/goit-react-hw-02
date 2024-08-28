@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-export default function Options({ updateFeedback }) {
+export default function Options({
+  updateFeedback,
+  totalFeedback,
+  resetFeedback,
+}) {
+  const isAble = totalFeedback !== 0;
+
   return (
     <div>
       <button
@@ -24,6 +30,8 @@ export default function Options({ updateFeedback }) {
       >
         Bad
       </button>
+
+      {isAble && <button onClick={resetFeedback}>Reset</button>}
     </div>
   );
 }
