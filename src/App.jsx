@@ -1,0 +1,39 @@
+import { useEffect, useState } from "react";
+
+import "./App.css";
+import Description from "./components/Description/Description";
+import Options from "./components/Options/Options";
+import Feedback from "./components/Feedback/Feedback";
+
+function App() {
+  // const [value, setValue] = useState({ good: 0, neutral: 0, bad: 0 });
+
+  const [value, setValue] = useState(() => {
+    const savedfeedback = window.localStorage.getItem("feedback");
+
+    return savedfeedback
+      ? JSON.parse(savedfeedback)
+      : { good: 0, neutral: 0, bad: 0 };
+  });
+
+  const updateFeedback = (feedbackType) => {
+    setValue({
+      ...value,
+      [feedbackType]: value[feedbackType] + 1,
+    });
+  };
+
+  useEffect(() => {
+    window.localStorage.setItem("feedback", JSON.stringify(value)), [value];
+  });
+
+  return (
+    <>
+      <Description />
+      <Options updateFeedback={updateFeedback} />
+      <Feedback state={value} />
+    </>
+  );
+}
+
+export default App;
