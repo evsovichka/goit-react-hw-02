@@ -22,14 +22,16 @@ function App() {
   };
 
   useEffect(() => {
-    window.localStorage.setItem("feedback", JSON.stringify(value)), [value];
-  });
+    window.localStorage.setItem("feedback", JSON.stringify(value));
+  }, [value]);
 
   const resetFeedback = () => setValue({ good: 0, neutral: 0, bad: 0 });
 
   const totalFeedback = value.good + value.bad + value.neutral;
 
-  const averageValue = Math.round((value.good / totalFeedback) * 100);
+  const positiveFeedbackPercentage = Math.round(
+    ((value.good + value.neutral) / totalFeedback) * 100
+  );
 
   return (
     <>
@@ -42,7 +44,7 @@ function App() {
       {totalFeedback ? (
         <Feedback
           state={value}
-          averageValue={averageValue}
+          positiveFeedbackPercentage={positiveFeedbackPercentage}
           totalFeedback={totalFeedback}
         />
       ) : (
