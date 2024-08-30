@@ -30,7 +30,7 @@ function App() {
   const totalFeedback = value.good + value.bad + value.neutral;
 
   const positiveFeedbackPercentage = Math.round(
-    ((value.good + value.neutral) / totalFeedback) * 100
+    (value.good / totalFeedback) * 100
   );
 
   return (
@@ -48,7 +48,7 @@ function App() {
           totalFeedback={totalFeedback}
         />
       ) : (
-        <Notification />
+        <Notification noReviewMessage="No feedback yet" />
       )}
     </>
   );
